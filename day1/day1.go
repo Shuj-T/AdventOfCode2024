@@ -64,6 +64,7 @@ func main() {
 		}
 	}
 	fmt.Println("Total distance:", total)
+
 	// Part Two
 	sim_score := 0
 	for _, number := range lefts {
