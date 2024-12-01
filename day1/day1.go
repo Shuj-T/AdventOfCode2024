@@ -29,6 +29,9 @@ func main() {
 
 	var index uint = 0
 
+	// Part Two
+	right_occur := make(map[int]int)
+
 	for scanner.Scan() {
 
 		var line string = scanner.Text()
@@ -36,6 +39,13 @@ func main() {
 
 		left[index], err = strconv.Atoi(values[0])
 		right[index], err = strconv.Atoi(values[1])
+
+		// Part Two
+		if !does_exist(right_occur, right[index]) {
+			right_occur[right[index]] = 0
+		}
+		right_occur[right[index]] += 1
+
 		index++
 	}
 	lefts := left[:]
@@ -54,4 +64,24 @@ func main() {
 		}
 	}
 	fmt.Println("Total distance:", total)
+	// Part Two
+	sim_score := 0
+	for _, number := range lefts {
+		sim_score += number * get_value_or_zero(right_occur, number)
+	}
+	fmt.Println("Similarity Score:", sim_score)
+
+}
+
+func does_exist(map_to_check map[int]int, value int) bool {
+	_, ok := map_to_check[value]
+	return ok
+}
+
+func get_value_or_zero(map_to_check map[int]int, value int) int {
+	value, ok := map_to_check[value]
+	if !ok {
+		return 0
+	}
+	return value
 }
