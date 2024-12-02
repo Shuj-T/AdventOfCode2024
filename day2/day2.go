@@ -22,8 +22,12 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
+	part_one(file)
+}
 
+func part_one(file *os.File) {
 	scanner := bufio.NewScanner(file)
+
 	var safe_count uint = 0
 	var index uint = 0
 
@@ -78,7 +82,7 @@ func main() {
 		}
 		index++
 	}
-	fmt.Println(safe_count)
+	fmt.Println("Safe Count", safe_count)
 }
 
 func intAbs(value int) int {
