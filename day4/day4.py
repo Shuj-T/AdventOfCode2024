@@ -49,10 +49,39 @@ def part_one(grid):
     print(xmas_count)
 
 
+def check_adj(a, b):
+    if a != b and a in ["M", "S"] and b in ["M", "S"]:
+        return True
+    return False
+
+
+def check_x_mas(i, j, grid):
+    dir = [(1, 1), (-1, -1), (1, -1), (-1, 1)]
+    tl = check_grid(i - 1, j - 1, grid)
+    tr = check_grid(i - 1, j + 1, grid)
+    bl = check_grid(i + 1, j - 1, grid)
+    br = check_grid(i + 1, j + 1, grid)
+
+    if check_adj(tl, br) and check_adj(tr, bl):
+        return True
+    return False
+
+
+def part_two(grid):
+    x_mas_count = 0
+    for i, row in enumerate(grid):
+        for j, char in enumerate(row):
+            if char == "A":
+                if check_x_mas(i, j, grid):
+                    x_mas_count += 1
+    print(x_mas_count)
+
+
 if "__main__" == __name__:
     grid = []
     with open(DATA_PATH) as lines:
         for line in lines:
             row = [char for char in line if not char == "\n"]
             grid.append(row)
-    part_one(grid)
+    # part_one(grid)
+    part_two(grid)
