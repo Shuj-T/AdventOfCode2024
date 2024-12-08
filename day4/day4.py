@@ -32,13 +32,7 @@ def check_xmas(i, j, grid, xi=0, dir=(0, 0)):
             return 0
 
 
-if "__main__" == __name__:
-    grid = []
-    with open(DATA_PATH) as lines:
-        for line in lines:
-            row = [char for char in line if not char == "\n"]
-            grid.append(row)
-
+def part_one(grid):
     xmas_count = 0
     x_loc = []
     xmas_loc = []
@@ -50,7 +44,15 @@ if "__main__" == __name__:
                 xmas_count += check_xmas(i, j, grid)
                 if before < xmas_count:
                     xmas_loc.append((i, j))
-
-    print(xmas_count)
     # print(xmas_loc)
     # print(x_loc)
+    print(xmas_count)
+
+
+if "__main__" == __name__:
+    grid = []
+    with open(DATA_PATH) as lines:
+        for line in lines:
+            row = [char for char in line if not char == "\n"]
+            grid.append(row)
+    part_one(grid)
